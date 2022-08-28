@@ -31,7 +31,7 @@ class DirectDashboard extends StatelessWidget {
         home: Scaffold(
         
           appBar: AppBar(
-             title: Text('Sample App'),
+             title: Text('Single Server Dashboard:'),
           backgroundColor: Colors.teal,
           ),
           body: Container(
@@ -221,7 +221,7 @@ class DirectDashboard extends StatelessWidget {
                                           IG: 57,
                                           IB: 59,
                                           Headval: "Sytem Length:",
-                                          Unitval: "minutes"),
+                                          Unitval: "customers"),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.symmetric(
@@ -232,7 +232,7 @@ class DirectDashboard extends StatelessWidget {
                                         IG: 91,
                                         IB: 212,
                                         Headval: "Queue Length:",
-                                        Unitval: "minutes",
+                                        Unitval: "customers",
                                       ),
                                     ),
                                     Padding(
@@ -266,7 +266,8 @@ class DirectDashboard extends StatelessWidget {
                             SizedBox(height: 40.h,),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 0.h),
-                              child: Summary(utilize: state.singleServerUtilization.toStringAsFixed(2), idle: ((1 -
+                              child: Summary(
+                                utilize: (state.singleServerUtilization*100).toStringAsFixed(2), idle: ((1 -
                                                             (state
                                                                 .singleServerUtilization))*100).toStringAsFixed(2), lq: state.avgLengthQueue_singleServer.toStringAsFixed(2), wq: state.avgWaitQueue_singleServer.toStringAsFixed(2), ls: state.avgLengthSys_singleServer.toStringAsFixed(2), ws: state.avgWaitSys_singleServer.toStringAsFixed(2)),
                             )

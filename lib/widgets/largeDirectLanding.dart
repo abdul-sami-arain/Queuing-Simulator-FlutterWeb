@@ -82,6 +82,14 @@ class ModelGetter extends StatelessWidget {
                             ElevatedButton(
                               child: Text('Markoveon/Markoveon'),
                               onPressed: () {
+                                if(state.numericVal == 0 ){
+                                  state.meanArrival =1/ (double.parse(state.meanInterArrival.text));
+                                  state.meanservice =1/ (double.parse(state.meanService.text));
+                                }
+                                else if(state.numericVal == 1 ){
+                                  state.meanArrival =(double.parse(state.meanInterArrival.text));
+                                  state.meanservice =(double.parse(state.meanService.text));
+                                }
                                 state.MM();
                                 if (state.servers==1) {
                                   Navigator.push(

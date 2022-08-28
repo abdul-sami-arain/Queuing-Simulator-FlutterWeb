@@ -68,6 +68,14 @@ class MgGetter extends StatelessWidget {
                               
                                 
                                  onPressed: () {
+                                if(state.numericVal == 0 ){
+                                  state.meanArrival =1/ (double.parse(state.meanInterArrival.text));
+                                 
+                                }
+                                else if(state.numericVal == 1 ){
+                                  state.meanArrival =(double.parse(state.meanInterArrival.text));
+                                 
+                                }  
                                 state.MGGamma();
                                 if (state.servers==1) {
                                   Navigator.push(
@@ -144,17 +152,25 @@ class MgGetter extends StatelessWidget {
                             ElevatedButton(
                               child: Text('Simulate'),
                                onPressed: () {
+                                if(state.numericVal == 0 ){
+                                  state.meanArrival =1/ (double.parse(state.meanInterArrival.text));
+                                 
+                                }
+                                else if(state.numericVal == 1 ){
+                                  state.meanArrival =(double.parse(state.meanInterArrival.text));
+                                 
+                                }  
                                 state.MGUniform();
-                                // if (state.servers==1) {
-                                //   Navigator.push(
-                                // context,
-                                // MaterialPageRoute(builder: (context) => DirectDashboard()),);
-                                // }
-                                // else{
-                                //   Navigator.push(
-                                // context,
-                                // MaterialPageRoute(builder: (context) => DirectDashboardMulti()),);
-                                // }
+                                if (state.servers==1) {
+                                  Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => DirectDashboard()),);
+                                }
+                                else{
+                                  Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => DirectDashboardMulti()),);
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Color.fromRGBO(67, 162, 220, 1),
@@ -219,6 +235,14 @@ class MgGetter extends StatelessWidget {
                             ElevatedButton(
                               child: Text('Simulate'),
                                 onPressed: () {
+                                 if(state.numericVal == 0 ){
+                                  state.meanArrival =1/ (double.parse(state.meanInterArrival.text));
+                                 
+                                }
+                                else if(state.numericVal == 1 ){
+                                  state.meanArrival =(double.parse(state.meanInterArrival.text));
+                                 
+                                }  
                                 state.MGBeta();
                                 if (state.servers==1) {
                                   Navigator.push(

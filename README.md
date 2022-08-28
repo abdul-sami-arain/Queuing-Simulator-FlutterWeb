@@ -1,10 +1,12 @@
-# queuesim
+#  Queuing Simulator
 
-A new Flutter project.
+## What is Queuing Theory?
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
+Queuing theory is a branch of mathematics that studies how lines form, how they <br>
+function, and why they malfunction. Queuing theory examines every component of <br>
+waiting in line, including the arrival process, service process, number of servers, <br>
+number of system places, and the number of customers—which might be people, data <br>
+packets, cars, or anything else.<br>
 
 A few resources to get you started if this is your first Flutter project:
 

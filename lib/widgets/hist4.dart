@@ -47,7 +47,7 @@ class _Hist4State extends State<Hist4> {
           width: 0.5,
           showNormalDistributionCurve: true,
           curveColor: const Color.fromRGBO(192, 108, 132, 1),
-          binInterval: 2,
+          binInterval: 1,
           yValueMapper: (HISTDATA_SERVICE data, _) => data.Y)
     ]));
     

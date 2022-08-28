@@ -6,6 +6,7 @@ import 'package:queuesim/widgets/hist3.dart';
 import 'package:queuesim/widgets/hist4.dart';
 import 'package:queuesim/widgets/indirectOutput.dart';
 import 'package:queuesim/widgets/mainHeading.dart';
+import 'package:queuesim/widgets/step1.dart';
 import 'package:queuesim/widgets/subhead.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +128,11 @@ class Indirect2 extends StatelessWidget {
                     height: 400,
                     width: 400,
                     child: Hist2(),
+                  ),
+                  Container(
+                    height: 400,
+                    width: 400,
+                    child: Step1(),
                   ),
                   Container(
                     height: 400,

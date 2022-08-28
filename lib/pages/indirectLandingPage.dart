@@ -1,7 +1,11 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
+import 'package:queuesim/pages/directDashboard.dart';
+import 'package:queuesim/pages/directDashboardMulti.dart';
+import 'package:queuesim/pages/randomDashoboard.dart';
 import 'package:queuesim/widgets/indirectLanding2.dart';
 import 'package:queuesim/widgets/indirectLanding3.dart';
+import 'package:queuesim/widgets/textfield.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +39,56 @@ class Indirect extends StatelessWidget {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Indirect3()));
     }
+    Rand(){
+      showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Markovian/Markovian/server(s):'),
+                          content: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Paragraph(
+                                  para: "Enter value of arrival mean:",
+                                  R: 67,
+                                  G: 162,
+                                  B: 220),
+                              TexttField(Controller: state.RandmeanArrival),
+                              Paragraph(
+                                  para: "Enter value of service mean:",
+                                  R: 67,
+                                  G: 162,
+                                  B: 220),
+                              TexttField(Controller: state.RandmeanService),
+                              Paragraph(
+                                  para: "Enter number of server(s):",
+                                  R: 67,
+                                  G: 162,
+                                  B: 220),
+                              TexttField(Controller: state.Randno_of_server),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: Text('Random Simulation'),
+                              onPressed: () {
+                                state.RandomlyGeneration();
+                               Navigator.push(
+          context, MaterialPageRoute(builder: (context) => RandomDashboard1()));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color.fromRGBO(67, 162, 220, 1),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 150, vertical: 20),
+                                  textStyle: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ],
+                        );
+                      });
+
+    }
 
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -50,7 +104,13 @@ class Indirect extends StatelessWidget {
             onPressed: () {
               server2();
             },
-            child: Text("Multi Server"))   
+            child: Text("Multi Server")),
+        ElevatedButton(
+            onPressed: () {
+              Rand();
+              
+            },
+            child: Text("Random Numbers"))       
             ],
           ),
           body: Container(

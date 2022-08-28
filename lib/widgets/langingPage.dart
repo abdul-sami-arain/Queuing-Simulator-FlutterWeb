@@ -4,9 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:queuesim/controllers/stateProvider.dart';
 import 'package:queuesim/pages/directLandingPage.dart';
 import 'package:queuesim/pages/indirectLandingPage.dart';
+import 'package:queuesim/pages/multiRandomDashboard.dart';
+import 'package:queuesim/pages/randomDashoboard.dart';
 import 'package:queuesim/widgets/button.dart';
 import 'package:queuesim/widgets/paragraph.dart';
 import 'package:http/http.dart' as http;
+import 'package:queuesim/widgets/textfield.dart';
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'package:universal_io/io.dart';
@@ -46,75 +49,223 @@ class largeLanding extends StatelessWidget {
       }
     }
 
+    Rand() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Markovian/Markovian/server(s):'),
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Paragraph(
+                      para: "Enter value of arrival mean:",
+                      R: 67,
+                      G: 162,
+                      B: 220),
+                  TexttField(Controller: state.RandmeanArrival),
+                  Paragraph(
+                      para: "Enter value of service mean:",
+                      R: 67,
+                      G: 162,
+                      B: 220),
+                  TexttField(Controller: state.RandmeanService),
+                  Paragraph(
+                      para: "Simulation Time(min):", R: 67, G: 162, B: 220),
+                  TexttField(Controller: state.Time_of_simulation),
+                  Paragraph(
+                      para: "Enter number of server(s):",
+                      R: 67,
+                      G: 162,
+                      B: 220),
+                  TexttField(Controller: state.Randno_of_server),
+                ],
+              ),
+              actions: <Widget>[
+                ElevatedButton(
+                  child: Text('Random Simulation'),
+                  onPressed: () {
+                    if (state.RandServers == 1) {
+                      state.RandomlyGeneration();
+                      state.SingleTimeSimu();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RandomDashboard1()));
+                    } else if (state.RandServers == 2) {
+                      state.RandomlyGeneration();
+                      state.multiSim();
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MultiRandomDashboard1()));
+                    } else {
+                      print("error");
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromRGBO(67, 162, 220, 1),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 150, vertical: 20),
+                      textStyle:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            );
+          });
+    }
+
     return Scaffold(
       body: Row(
         children: [
           Expanded(
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(color: Color.fromRGBO(67, 162, 220, 1)),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Paragraph(
-                        para:
-                            "On selecting this, it will give you six types\n\nof queue models, you have to select one option\n\nof them ,then it requires further info from you.. ",
-                        R: 255,
-                        G: 255,
-                        B: 255),
-                    SizedBox(
-                      height: 20.h,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration:
+                        BoxDecoration(color: Color.fromRGBO(67, 162, 220, 1)),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Paragraph(
+                              para:
+                                  "On selecting this, it will give you six types\n\nof queue models, you have to select one option\n\nof them ,then it requires further info from you.. ",
+                              R: 255,
+                              G: 255,
+                              B: 255),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          GestureDetector(
+                            child:
+                                Button1(text: "Mean", R: 255, G: 255, B: 255),
+                            onTap: () {
+                              state.numericVal = 0;
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DirectLandingPage()));
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    GestureDetector(
-                      child: Button1(text: "Direct", R: 255, G: 255, B: 255),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DirectLandingPage()));
-                        
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Paragraph(
+                              para:
+                                  "On selecting this, it will give you six types\n\nof queue models, you have to select one option\n\nof them ,then it requires further info from you.. ",
+                              R: 67,
+                              G: 162,
+                              B: 220),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          GestureDetector(
+                            child: Button1(text: "Rate", R: 67, G: 162, B: 220),
+                            onTap: () {
+                              state.numericVal = 1;
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DirectLandingPage()));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(color: Colors.white),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Paragraph(
-                        para:
-                            "It requires indiviual arrivals and service ,you\n\nyou should give atleast 20 observations ,It simulates\n\nyour system & estimates each component of system.. ",
-                        R: 67,
-                        G: 162,
-                        B: 220),
-                    SizedBox(
-                      height: 20.h,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Paragraph(
+                              para:
+                                  "It requires indiviual arrivals and service ,you\n\nyou should give atleast 20 observations ,It simulates\n\nyour system & estimates each component of system.. ",
+                              R: 67,
+                              G: 162,
+                              B: 220),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          GestureDetector(
+                            child: Button1(
+                                text: "Simulation", R: 67, G: 162, B: 220),
+                            onTap: () {
+                              getDataFromSheet();
+                              print(state.InterArrivalList.length);
+                              print(state.ServiceList.length);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Indirect()));
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    GestureDetector(
-                      child: Button1(text: "Indirect", R: 67, G: 162, B: 220),
-                      onTap: () {
-                        getDataFromSheet();
-                        print(state.InterArrivalList.length);
-                        print(state.ServiceList.length);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Indirect()));
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration:
+                        BoxDecoration(color: Color.fromRGBO(67, 162, 220, 1)),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Paragraph(
+                              para:
+                                  "It requires  arrival and service mean values. It\n\nGenerates random poisson arrivals and exponential\n\nservices & estimates each component of system.. ",
+                              R: 255,
+                              G: 255,
+                              B: 255),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          GestureDetector(
+                            child:
+                                Button1(text: "Random", R: 255, G: 255, B: 255),
+                            onTap: () {
+                              Rand();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           )
         ],
@@ -122,4 +273,3 @@ class largeLanding extends StatelessWidget {
     );
   }
 }
-

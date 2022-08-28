@@ -3,15 +3,15 @@ import 'package:queuesim/controllers/stateProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class Hist3 extends StatefulWidget {
-  const Hist3({Key? key}) : super(key: key);
+class HIST2TIMELY extends StatefulWidget {
+  const HIST2TIMELY({Key? key}) : super(key: key);
 
   @override
-  State<Hist3> createState() => _Hist3State();
+  State<HIST2TIMELY> createState() => _HIST2TIMELYState();
 }
 
-class _Hist3State extends State<Hist3> {
-late TooltipBehavior _tooltipBehavior;
+class _HIST2TIMELYState extends State<HIST2TIMELY> {
+   late TooltipBehavior _tooltipBehavior;
 
     @override
     void initState() {
@@ -23,11 +23,10 @@ late TooltipBehavior _tooltipBehavior;
      var state = Provider.of<AppState>((context), listen: false);
      return Container(
         child: SfCartesianChart(
-
-              tooltipBehavior: _tooltipBehavior,
-      
+          tooltipBehavior: _tooltipBehavior,
+          
           title: ChartTitle(
-                  text: 'Arrival analysis',
+                  text: 'InterArrival analysis',
                   backgroundColor: Colors.white,
                   borderColor: Colors.blue,
                   borderWidth: 2,
@@ -43,17 +42,15 @@ late TooltipBehavior _tooltipBehavior;
                 palette: <Color>[
                             Colors.teal,],
           series: <ChartSeries>[
-      HistogramSeries<HISTDATA_ARRIVAL, double>(
-          enableTooltip: true, 
-          dataSource: state.histDataArrival,
+      HistogramSeries<TIMELYHISTDATA, double>(
+          enableTooltip: true,
+          dataSource: state.timelyhistData,
           width: 0.5,
           showNormalDistributionCurve: true,
           curveColor: const Color.fromRGBO(192, 108, 132, 1),
           binInterval: 1,
-          yValueMapper: (HISTDATA_ARRIVAL data, _) => data.Y,
-      )
+          yValueMapper: (TIMELYHISTDATA data, _) => data.Y)
           
     ]));
   }
 }
-

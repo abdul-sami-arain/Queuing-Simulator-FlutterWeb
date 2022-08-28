@@ -3,15 +3,15 @@ import 'package:queuesim/controllers/stateProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class Hist3 extends StatefulWidget {
-  const Hist3({Key? key}) : super(key: key);
+class HIST3TIMELY extends StatefulWidget {
+  const HIST3TIMELY({Key? key}) : super(key: key);
 
   @override
-  State<Hist3> createState() => _Hist3State();
+  State<HIST3TIMELY> createState() => _HIST3TIMELYState();
 }
 
-class _Hist3State extends State<Hist3> {
-late TooltipBehavior _tooltipBehavior;
+class _HIST3TIMELYState extends State<HIST3TIMELY> {
+  late TooltipBehavior _tooltipBehavior;
 
     @override
     void initState() {
@@ -43,17 +43,16 @@ late TooltipBehavior _tooltipBehavior;
                 palette: <Color>[
                             Colors.teal,],
           series: <ChartSeries>[
-      HistogramSeries<HISTDATA_ARRIVAL, double>(
+      HistogramSeries<TIMELY_HISTDATA_ARRIVAL, double>(
           enableTooltip: true, 
-          dataSource: state.histDataArrival,
+          dataSource: state.timelyhistDataArrival,
           width: 0.5,
           showNormalDistributionCurve: true,
           curveColor: const Color.fromRGBO(192, 108, 132, 1),
           binInterval: 1,
-          yValueMapper: (HISTDATA_ARRIVAL data, _) => data.Y,
+          yValueMapper: (TIMELY_HISTDATA_ARRIVAL data, _) => data.Y,
       )
           
     ]));
   }
 }
-

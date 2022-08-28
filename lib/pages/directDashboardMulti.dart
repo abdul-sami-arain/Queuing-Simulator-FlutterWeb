@@ -27,258 +27,269 @@ class DirectDashboardMulti extends StatelessWidget {
     var state = Provider.of<AppState>((context), listen: false);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: new ThemeData(scaffoldBackgroundColor: Color.fromRGBO(240, 242, 246, 1)),
+        theme: new ThemeData(
+            scaffoldBackgroundColor: Color.fromRGBO(240, 242, 246, 1)),
         home: Scaffold(
-        
           appBar: AppBar(
-             title: Text('Sample App'),
-          backgroundColor: Colors.amber,
+            title: Text('Multi Server Dashboard:'),
+            backgroundColor: Colors.teal,
           ),
           body: Container(
-            color: Color.fromRGBO(240, 242, 246, 1),
+              color: Color.fromRGBO(240, 242, 246, 1),
               child: Row(
-            children: [
-              Expanded(
-                
-                  child: ListView(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 20.h),
-                        child: DirectInputContainer1(
-                          val: state.meanArrival,
-                          IR: 39,
-                          IG: 91,
-                          IB: 212,
-                          Headval: "Arrival",
-                          Unitval: "minutes",
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 20.h),
+                          child: DirectInputContainer1(
+                            val: state.meanArrival,
+                            IR: 39,
+                            IG: 91,
+                            IB: 212,
+                            Headval: "Arrival",
+                            Unitval: "minutes",
+                          ),
                         ),
-                      ),
-                      
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 20.h),
-                        child: DirectInputContainer1(
-                          val: state.meanservice,
-                          IR: 214,
-                          IG: 1,
-                          IB: 54,
-                          Headval: "Service",
-                          Unitval: "minutes",
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 20.h),
+                          child: DirectInputContainer1(
+                            val: state.meanservice,
+                            IR: 214,
+                            IG: 1,
+                            IB: 54,
+                            Headval: "Service",
+                            Unitval: "minutes",
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 20.h),
-                        child: DirectInputContainer1(
-                          val: state.servers,
-                          IR: 276,
-                          IG: 176,
-                          IB: 1,
-                          Headval: "Servers",
-                          Unitval: "server(s)",
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 20.h),
+                          child: DirectInputContainer1(
+                            val: state.servers,
+                            IR: 276,
+                            IG: 176,
+                            IB: 1,
+                            Headval: "Servers",
+                            Unitval: "server(s)",
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 20.h),
-                        child: Kendal(
-                          val: state.kendallNotation,
-                          KR: 1,
-                          KG: 190,
-                          KB: 117,
-                          Headval: "Kendall Notation",
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 20.h),
+                          child: Kendal(
+                            val: state.kendallNotation,
+                            KR: 1,
+                            KG: 190,
+                            KB: 117,
+                            Headval: "Kendall Notation",
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 20.h),
-                        child: Kendal(
-                          val: state.ArrivalDistr,
-                          KR: 55,
-                          KG: 57,
-                          KB: 59,
-                          Headval: "Arrival Distr:",
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 20.h),
+                          child: Kendal(
+                            val: state.ArrivalDistr,
+                            KR: 55,
+                            KG: 57,
+                            KB: 59,
+                            Headval: "Arrival Distr:",
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 20.h),
-                        child: Kendal(
-                          val: state.ServiceDistr,
-                          KR: 39,
-                          KG: 91,
-                          KB: 212,
-                          Headval: "Service Distr:",
-                        ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 20.h),
+                          child: Kendal(
+                            val: state.ServiceDistr,
+                            KR: 39,
+                            KG: 91,
+                            KB: 212,
+                            Headval: "Service Distr:",
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              
-              Expanded(
-                flex: 4,
-                
-                  
-                    
-                      
-                        child: Column(
-                          
-                          children: [
-                            SizedBox(height: 30.h,),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 0.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex: 3,
-                                      child: Container(
-                                          width: 100.w,
-                                          height: 600.h,
-                                          color: Colors.white,
-                                          child: Hist())),
-                                  SizedBox(
-                                    width: 20.w,
-                                  ),
-                                  Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 600.h,
-                                        color: Colors.white,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 0.h),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                      width: 100.w,
+                                      height: 600.h,
+                                      color: Colors.white,
+                                      child: Hist())),
+                              SizedBox(
+                                width: 20.w,
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 600.h,
+                                    color: Colors.white,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Column(
                                           children: [
-                                            Column(
-                                              children: [
-                                                Paragraph(
-                                                    para: "Server Description:",
-                                                    R: 153,
-                                                    G: 153,
-                                                    B: 153),
-                                                Divider(
-                                                  color: Color.fromRGBO(
-                                                      239, 238, 243, 1),
-                                                  thickness: 1.0,
-                                                ),
-                                              ],
+                                            Paragraph(
+                                                para: "Server Description:",
+                                                R: 153,
+                                                G: 153,
+                                                B: 153),
+                                            Divider(
+                                              color: Color.fromRGBO(
+                                                  239, 238, 243, 1),
+                                              thickness: 1.0,
                                             ),
-                                            ServerBusy(
-                                              busyTime: state.multiServerUtilization,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 35.w),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Head3(
-                                                          heading: ((1 -
-                                                            (state
-                                                                .multiServerUtilization))*100).toStringAsFixed(2)+'%',
-                                                          R: 255,
-                                                          G: 193,
-                                                          B: 7),
-                                                      IdlePerc(
-                                                        idleTime: 1 -
-                                                            (state
-                                                                .multiServerUtilization),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  subhead2(
-                                                      heading: "Idle Percent",
-                                                      R: 153,
-                                                      G: 153,
-                                                      B: 153),
-                                                ],
-                                              ),
-                                            )
                                           ],
                                         ),
-                                      )),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 40.h,),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 0.h),
-                              child: Container(
-                                width: double.infinity,
-                                
-                                color: Colors.transparent,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.w, vertical: 0.h),
-                                      child: DirectInputContainer(
-                                          val: state.avgLengthSys_multiServer,
-                                          IR: 55,
-                                          IG: 57,
-                                          IB: 59,
-                                          Headval: "System Length:",
-                                          Unitval: "minutes"),
+                                        ServerBusy(
+                                          busyTime:
+                                              state.multiServerUtilization,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 25.w),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Head3(
+                                                      heading:
+                                                          ((1 - (state.multiServerUtilization)) *
+                                                                      100)
+                                                                  .toStringAsFixed(
+                                                                      2) +
+                                                              '%',
+                                                      R: 255,
+                                                      G: 193,
+                                                      B: 7),
+                                                  IdlePerc(
+                                                    idleTime: 1 -
+                                                        (state
+                                                            .multiServerUtilization),
+                                                  ),
+                                                ],
+                                              ),
+                                              subhead2(
+                                                  heading: "Idle Percent",
+                                                  R: 153,
+                                                  G: 153,
+                                                  B: 153),
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.w, vertical: 0.h),
-                                      child: DirectInputContainer(
-                                        val: state.avgLengthQueue_multiServer,
-                                        IR: 39,
-                                        IG: 91,
-                                        IB: 212,
-                                        Headval: "Queue Length:",
-                                        Unitval: "minutes",
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.w, vertical: 0.h),
-                                      child: DirectInputContainer(
-                                        val: state.avgWaitQueue_multiServer,
-                                        IR: 214,
-                                        IG: 1,
-                                        IB: 54,
-                                        Headval: "Wait Queue:",
-                                        Unitval: "minutes",
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.w, vertical: 0.h),
-                                      child: DirectInputContainer(
-                                        val: state.avgWaitSys_multiServer.toDouble(),
-                                        IR: 276,
-                                        IG: 176,
-                                        IB: 1,
-                                        Headval: "Wait System:",
-                                        Unitval: "minutes",
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 40.h,),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 0.h),
-                              child: Summary(utilize: state.multiServerUtilization.toStringAsFixed(2), idle: ((1 -
-                                                            (state
-                                                                .multiServerUtilization))*100).toStringAsFixed(2), lq: state.avgLengthQueue_multiServer.toStringAsFixed(2), wq: state.avgWaitQueue_multiServer.toStringAsFixed(2), ls: state.avgLengthSys_multiServer.toStringAsFixed(2), ws: state.avgWaitSys_multiServer.toStringAsFixed(2)),
-                            )
-                          ],
+                                  )),
+                            ],
+                          ),
                         ),
-                      ),
-                    
-                  
-                
-              
-            ],
-          )),
+                        SizedBox(
+                          height: 40.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 0.h),
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.transparent,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.w, vertical: 0.h),
+                                  child: DirectInputContainer(
+                                      val: state.avgLengthSys_multiServer,
+                                      IR: 55,
+                                      IG: 57,
+                                      IB: 59,
+                                      Headval: "System Length:",
+                                      Unitval: "customers"),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.w, vertical: 0.h),
+                                  child: DirectInputContainer(
+                                    val: state.avgLengthQueue_multiServer,
+                                    IR: 39,
+                                    IG: 91,
+                                    IB: 212,
+                                    Headval: "Queue Length:",
+                                    Unitval: "customers",
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.w, vertical: 0.h),
+                                  child: DirectInputContainer(
+                                    val: state.avgWaitQueue_multiServer,
+                                    IR: 214,
+                                    IG: 1,
+                                    IB: 54,
+                                    Headval: "Wait Queue:",
+                                    Unitval: "minutes",
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.w, vertical: 0.h),
+                                  child: DirectInputContainer(
+                                    val:
+                                        state.avgWaitSys_multiServer.toDouble(),
+                                    IR: 276,
+                                    IG: 176,
+                                    IB: 1,
+                                    Headval: "Wait System:",
+                                    Unitval: "minutes",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 0.h),
+                          child: Summary(
+                              utilize: ((state.multiServerUtilization)*100).toStringAsFixed(2),
+                                  
+                              idle: ((1 - (state.multiServerUtilization)) * 100)
+                                  .toStringAsFixed(2),
+                              lq: state.avgLengthQueue_multiServer
+                                  .toStringAsFixed(2),
+                              wq: state.avgWaitQueue_multiServer
+                                  .toStringAsFixed(2),
+                              ls: state.avgLengthSys_multiServer
+                                  .toStringAsFixed(2),
+                              ws: state.avgWaitSys_multiServer
+                                  .toStringAsFixed(2)),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
         ));
   }
 }

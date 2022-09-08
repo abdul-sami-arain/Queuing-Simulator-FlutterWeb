@@ -143,6 +143,16 @@ class RandomTimely {
   RandomTimely(this.A, this.B, this.C, this.D, this.E, this.F, this.G, this.H);
 }
 
+class History {
+  late final int A;
+  late final double B;
+  late final double C;
+  late final double D;
+  late final double E;
+  late final double F;
+  History(this.A, this.B, this.C, this.D, this.E, this.F);
+}
+
 class RandomTimelyMulti {
   // A --> timelyinterarrival multi
   // B --> timelyservice multi
@@ -197,8 +207,44 @@ class Randdata {
   Randdata(this.A, this.B, this.C);
 }
 
+class meanTATscatter {
+  late final int A;
+  late final double B;
+  meanTATscatter(this.A, this.B);
+}
+
+class meanSTscatter {
+  late final int A;
+  late final double B;
+  meanSTscatter(this.A, this.B);
+}
+
+class meanIATscatter {
+  late final int A;
+  late final double B;
+  meanIATscatter(this.A, this.B);
+}
+
+class meanWTscatter {
+  late final int A;
+  late final double B;
+  meanWTscatter(this.A, this.B);
+}
+
+class meanWTTWscatter {
+  late final int A;
+  late final double B;
+  meanWTTWscatter(this.A, this.B);
+}
+
 class AppState extends ChangeNotifier {
   // -----------------------Graphs:---------------------------//
+  final List<meanTATscatter> meantatscatter = [];
+  final List<meanWTscatter> meanwtscatter = [];
+  final List<meanSTscatter> meanstscatter = [];
+  final List<meanIATscatter> meaniatscatter = [];
+  final List<meanWTTWscatter> meanwttwscatter = [];
+
   final List<HISTDATA> histData = []; // InterArrival analysis Graph:
   final List<HISTDATA_ARRIVAL> histDataArrival = []; // Arrival analysis Graph:
   final List<HISTDATA_SERVICE> histDataService = []; // service analysis Graph:
@@ -218,6 +264,7 @@ class AppState extends ChangeNotifier {
   final List<RandomTimelyMulti> randomtimelymulti = [];
   final List<Randomdata> randomdata = [];
   final List<XYDATA> MergeXY = [];
+  final List<History> historyList = [];
   final List X = [
     0,
     1,
@@ -249,6 +296,11 @@ class AppState extends ChangeNotifier {
   late List Y = [];
   late List Z = Y.reversed.toList();
   final List<Randdata> RandData = [];
+  int count = 1;
+  void increment() {
+    count++;
+    notifyListeners();
+  }
 
   fact(int x) {
     if (x == 0) {
@@ -541,11 +593,10 @@ class AppState extends ChangeNotifier {
   MGGamma() {
     if (servers == 1) {
       GammaAverage(maximum, minimum);
-      if(numericVal==0 ){
+      if (numericVal == 0) {
         meanservice = 1 / GammaMean;
-      }
-      else if(numericVal==1){
-        meanservice =  GammaMean;
+      } else if (numericVal == 1) {
+        meanservice = GammaMean;
       }
       GammaVar(maximum, minimum);
       SqQuoArr((1 / (meanArrival * meanArrival)), meanArrival);
@@ -568,11 +619,10 @@ class AppState extends ChangeNotifier {
       ArrivalDistr = 'Poisson';
       ServiceDistr = 'Gamma ';
       GammaAverage(maximum, minimum);
-      if(numericVal==0 ){
+      if (numericVal == 0) {
         meanservice = 1 / GammaMean;
-      }
-      else if(numericVal==1){
-        meanservice =  GammaMean;
+      } else if (numericVal == 1) {
+        meanservice = GammaMean;
       }
       GammaVar(maximum, minimum);
       multiserverRho(meanArrival, meanservice, servers);
@@ -599,11 +649,10 @@ class AppState extends ChangeNotifier {
   MGUniform() {
     if (servers == 1) {
       UniformAverage(maximum, minimum);
-      if(numericVal==0 ){
+      if (numericVal == 0) {
         meanservice = 1 / UniformMean;
-      }
-      else if(numericVal==1){
-        meanservice =  UniformMean;
+      } else if (numericVal == 1) {
+        meanservice = UniformMean;
       }
       UniformVar(maximum, minimum);
       singleserverRho(meanArrival, meanservice);
@@ -625,11 +674,10 @@ class AppState extends ChangeNotifier {
       ArrivalDistr = 'Poisson';
       ServiceDistr = 'Uniform ';
       UniformAverage(maximum, minimum);
-      if(numericVal==0 ){
+      if (numericVal == 0) {
         meanservice = 1 / UniformMean;
-      }
-      else if(numericVal==1){
-        meanservice =  UniformMean;
+      } else if (numericVal == 1) {
+        meanservice = UniformMean;
       }
       UniformVar(maximum, minimum);
       multiserverRho(meanArrival, meanservice, servers);
@@ -658,11 +706,10 @@ class AppState extends ChangeNotifier {
   MGBeta() {
     if (servers == 1) {
       BetaAverage(maximum, minimum);
-       if(numericVal==0 ){
+      if (numericVal == 0) {
         meanservice = 1 / BetaMean;
-      }
-      else if(numericVal==1){
-        meanservice =  BetaMean;
+      } else if (numericVal == 1) {
+        meanservice = BetaMean;
       }
       BetaVar(maximum, minimum);
       singleserverRho(meanArrival, meanservice);
@@ -685,11 +732,10 @@ class AppState extends ChangeNotifier {
       ServiceDistr = 'Beta ';
       BetaAverage(maximum, minimum);
       BetaAverage(maximum, minimum);
-       if(numericVal==0 ){
+      if (numericVal == 0) {
         meanservice = 1 / BetaMean;
-      }
-      else if(numericVal==1){
-        meanservice =  BetaMean;
+      } else if (numericVal == 1) {
+        meanservice = BetaMean;
       }
       BetaVar(maximum, minimum);
       multiserverRho(meanArrival, meanservice, servers);
@@ -977,6 +1023,13 @@ class AppState extends ChangeNotifier {
 
   var random = new Random();
 
+  List<double> historyAvgTATsingle = [];
+  List<double> historyWaitTimesingle = [];
+  List<double> historyAvgServiceTimesingle = [];
+  List<double> historyAvgIATsingle = [];
+  List<double> historyAvgWTTWWsingle = [];
+  List<int> iteration = [];
+
   RandomlyGeneration() {
     double cdf1 =
         (((pow(e, -RandMEANarrival)) * (pow(RandMEANarrival, x))) / fact(x));
@@ -1147,6 +1200,20 @@ class AppState extends ChangeNotifier {
     valuess.add(AvgIATSingle);
     valuess.add(AvgWaitTimeWhoWait);
 
+    //--HISTORY MAINTAIN--//
+    historyAvgTATsingle.add(AvgTimeCustSpendMartSingle);
+    historyWaitTimesingle.add(AvgTimeCustWaitMartSingle);
+    historyAvgServiceTimesingle.add(AvgTimeServiceMartSingle);
+    historyAvgIATsingle.add(AvgIATSingle);
+    historyAvgWTTWWsingle.add(AvgWaitTimeWhoWait);
+    iteration.add(count);
+    print(historyAvgTATsingle);
+    print(historyWaitTimesingle);
+    print(historyAvgServiceTimesingle);
+    print(historyAvgIATsingle);
+    print(historyAvgWTTWWsingle);
+    print(iteration);
+
     for (var i = 0; i < parameters.length; i++) {
       radial1data.add(RADIAL1(parameters[i], valuess[i], colors[i]));
     }
@@ -1181,6 +1248,136 @@ class AppState extends ChangeNotifier {
       timelystep1data
           .add(TIMELY_STEP1(timelycustomers[i], timelyWTQ[i], timelyTAT[i]));
     }
+    notifyListeners();
+  }
+
+  double meanHistoryTAT = 0;
+  double meanHistoryWT = 0;
+  double meanHistoryST = 0;
+  double meanHistoryIAT = 0;
+  double meanHistoryWTTWW = 0;
+
+  double medHistoryTAT = 0;
+  double medHistoryWT = 0;
+  double medHistoryST = 0;
+  double medHistoryIAT = 0;
+  double medHistoryWTTWW = 0;
+
+  double varHistoryTAT = 0;
+  double varHistoryWT = 0;
+  double varHistoryST = 0;
+  double varHistoryIAT = 0;
+  double varHistoryWTTWW = 0;
+
+  double sdHistoryTAT = 0;
+  double sdHistoryWT = 0;
+  double sdHistoryST = 0;
+  double sdHistoryIAT = 0;
+  double sdHistoryWTTWW = 0;
+
+  List<double> varHistoryTAT1 = [];
+  List<double> varHistoryWT1 = [];
+  List<double> varHistoryST1 = [];
+  List<double> varHistoryIAT1 = [];
+  List<double> varHistoryWTTWW1 = [];
+
+  historySend() {
+    for (var i = 0; i < historyAvgIATsingle.length; i++) {
+      historyList.add(History(
+          iteration[i],
+          historyAvgTATsingle[i],
+          historyWaitTimesingle[i],
+          historyAvgServiceTimesingle[i],
+          historyAvgIATsingle[i],
+          historyAvgWTTWWsingle[i]));
+    }
+    ////-----------average----------///
+    meanHistoryTAT = historyAvgTATsingle.sum / iteration.length;
+    meanHistoryWT = historyWaitTimesingle.sum / iteration.length;
+    meanHistoryST = historyAvgServiceTimesingle.sum / iteration.length;
+    meanHistoryIAT = historyAvgIATsingle.sum / iteration.length;
+    meanHistoryWTTWW = historyAvgWTTWWsingle.sum / iteration.length;
+
+    ////-----------median----------///
+    historyAvgTATsingle.sort();
+    historyWaitTimesingle.sort();
+    historyAvgServiceTimesingle.sort();
+    historyAvgIATsingle.sort();
+    historyAvgWTTWWsingle.sort();
+
+    if (historyAvgTATsingle.length % 2 == 0) {
+      double index1 = historyAvgTATsingle.length / 2;
+      medHistoryTAT = (historyAvgTATsingle[index1.toInt()] +
+              historyAvgTATsingle[(index1.toInt()) - 1]) /
+          2;
+
+      medHistoryWT = (historyWaitTimesingle[index1.toInt()] +
+              historyWaitTimesingle[(index1.toInt()) - 1]) /
+          2;
+
+      medHistoryST = (historyAvgServiceTimesingle[index1.toInt()] +
+              historyAvgServiceTimesingle[(index1.toInt()) - 1]) /
+          2;
+
+      medHistoryIAT = (historyAvgIATsingle[index1.toInt()] +
+              historyAvgIATsingle[(index1.toInt()) - 1]) /
+          2;
+
+      medHistoryWTTWW = (historyAvgWTTWWsingle[index1.toInt()] +
+              historyAvgWTTWWsingle[(index1.toInt()) - 1]) /
+          2;
+    } else {
+      double index1 = (historyAvgTATsingle.length / 2).floorToDouble();
+      medHistoryTAT = historyAvgTATsingle[index1.toInt()];
+      medHistoryWT = historyWaitTimesingle[index1.toInt()];
+      medHistoryST = historyAvgServiceTimesingle[index1.toInt()];
+      medHistoryIAT = historyAvgIATsingle[index1.toInt()];
+      medHistoryWTTWW = historyAvgWTTWWsingle[index1.toInt()];
+    }
+
+    ////-----------variance----------///
+
+    for (var i = 0; i < historyAvgIATsingle.length; i++) {
+      varHistoryTAT1
+          .add(pow((historyAvgTATsingle[i] - meanHistoryTAT), 2).toDouble());
+      varHistoryWT1
+          .add(pow((historyWaitTimesingle[i] - meanHistoryWT), 2).toDouble());
+      varHistoryST1.add(
+          pow((historyAvgServiceTimesingle[i] - meanHistoryST), 2).toDouble());
+      varHistoryIAT1
+          .add(pow((historyAvgIATsingle[i] - meanHistoryIAT), 2).toDouble());
+      varHistoryWTTWW1.add(
+          pow((historyAvgWTTWWsingle[i] - meanHistoryWTTWW), 2).toDouble());
+    }
+
+    varHistoryTAT = ((varHistoryTAT1.sum) / (iteration.length - 1));
+    varHistoryWT = ((varHistoryWT1.sum) / (iteration.length - 1));
+    varHistoryST = ((varHistoryST1.sum) / (iteration.length - 1));
+    varHistoryIAT = ((varHistoryIAT1.sum) / (iteration.length - 1));
+    varHistoryWTTWW = ((varHistoryWTTWW1.sum) / (iteration.length - 1));
+
+    ///--------------standard deviation------------////
+
+    sdHistoryTAT = sqrt(varHistoryTAT);
+    sdHistoryWT = sqrt(varHistoryWT);
+    sdHistoryST = sqrt(varHistoryST);
+    sdHistoryIAT = sqrt(varHistoryIAT);
+    sdHistoryWTTWW = sqrt(varHistoryWTTWW);
+
+    ///------------scatterd graphs--------------////
+
+    for (var i = 0; i < iteration.length; i++) {
+      meantatscatter.add(meanTATscatter(iteration[i], historyAvgTATsingle[i]));
+      meanwtscatter.add(meanWTscatter(iteration[i], historyWaitTimesingle[i]));
+      meanstscatter
+          .add(meanSTscatter(iteration[i], historyAvgServiceTimesingle[i]));
+      meaniatscatter.add(meanIATscatter(iteration[i], historyAvgIATsingle[i]));
+      meanwttwscatter
+          .add(meanWTTWscatter(iteration[i], historyAvgWTTWWsingle[i]));
+    }
+
+    print(meanHistoryST);
+    print(medHistoryST);
     notifyListeners();
   }
 
@@ -1307,18 +1504,6 @@ class AppState extends ChangeNotifier {
       timelyhistDataService
           .add(TIMELY_HISTDATA_SERVICE(timelyservice[i].toDouble()));
     }
-
-    //---------
-
-    print(cdf2);
-    print(cdf);
-    print(randomNumbers);
-    print(Interarrivals);
-    print(timelyInterarrivals);
-    print(arrivals);
-    print(timelyarrivals);
-    print(service);
-    print(timelyservice);
 
     // uploading data from list to class list:
     for (var i = 0; i < cdf.length; i++) {
